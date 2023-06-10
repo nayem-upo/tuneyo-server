@@ -27,8 +27,8 @@ async function run() {
 
         const instructorCollection = client.db("tuneYoDb").collection("instructors")
         const usersCollection = client.db("tuneYoDb").collection("users");
-        // const classCollection = client.db("tuneYoDb").collection("classes");
-        const selectedClassCollection = client.db("tuneYoDb").collection("selectedclasses");
+        const classCollection = client.db("tuneYoDb").collection("classes");
+        // const selectedClassCollection = client.db("tuneYoDb").collection("selectedclasses");
         const paymentClassCollection = client.db("tuneYoDb").collection("payments");
 
         //instructors api
