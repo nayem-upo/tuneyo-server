@@ -115,26 +115,26 @@ async function run() {
         });
 
 
-        app.patch('/classes/:id', async (req, res) => {
-            const id = req.params.id;
-            try {
-                const result = await classCollection.updateOne(
-                    { _id: new ObjectId(id) },
-                    { $set: { status: 'approved' } }
-                );
+        // app.patch('/classes/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     try {
+        //         const result = await classCollection.updateOne(
+        //             { _id: new ObjectId(id) },
+        //             { $set: { status: 'approved' } }
+        //         );
 
-                if (result.matchedCount === 1 && result.modifiedCount === 1) {
-                    res.status(200).json({ message: 'Successfully updated status.' });
-                } else if (result.matchedCount === 0) {
-                    res.status(404).json({ message: 'Class not found.' });
-                } else {
-                    res.status(500).json({ message: 'Failed to update status.' });
-                }
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ message: 'An error occurred while updating status.' });
-            }
-        });
+        //         if (result.matchedCount === 1 && result.modifiedCount === 1) {
+        //             res.status(200).json({ message: 'Successfully updated status.' });
+        //         } else if (result.matchedCount === 0) {
+        //             res.status(404).json({ message: 'Class not found.' });
+        //         } else {
+        //             res.status(500).json({ message: 'Failed to update status.' });
+        //         }
+        //     } catch (error) {
+        //         console.error(error);
+        //         res.status(500).json({ message: 'An error occurred while updating status.' });
+        //     }
+        // });
 
         app.get("/classes/toupdate/:id", async (req, res) => {
             const id = req.params.id;
