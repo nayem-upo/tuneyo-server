@@ -39,7 +39,7 @@ async function run() {
 
         // users apis
         app.get('/users', async (req, res) => {
-            const result = await usersCollection.find().toArray();
+            // const result = await usersCollection.find().toArray();
             res.send(result);
         })
         app.get('/users/:email', async (req, res) => {
