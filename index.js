@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+        // await client.connect();
 
         const instructorCollection = client.db("tuneYoDb").collection("instructors")
         const usersCollection = client.db("tuneYoDb").collection("users");
@@ -41,6 +41,18 @@ async function run() {
         app.get('/users', async (req, res) => {
             const result = await usersCollection.find().toArray();
             res.send(result);
+        })
+        app.patch('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const role = req.query.role;
+            const filter = { _id: new ObjectId(id) }
+            const UpdateDoc = {
+                $set: {
+                    role: role
+                }
+            }
+            const result = await usersCollection.updateOne(filter, UpdateDoc);
+            res.send(result)
         })
         app.get('/users/:email', async (req, res) => {
             const email = req.params.email;
@@ -235,7 +247,6 @@ async function run() {
         app.post('/create-payment-intent', async (req, res) => {
             const { price } = req.body;
             const amount = price * 100;
-            console.log(price, amount);
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: amount,
                 currency: "usd",
